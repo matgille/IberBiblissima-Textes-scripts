@@ -107,7 +107,8 @@ def work_loop(files, filter):
 						   aggregation_strategy="simple")
 	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="\t")
 	n = 0
-	splits_exceptions = ["HSMS-0037", "HSMS-0190", "HSMS-0248"]
+	no_splits = ["HSMS-0037", "HSMS-0190", "HSMS-0248"]
+	splits = ["HSMS-0409"]
 	skip_metadata_retrieval = False
 	previous_work = None
 	for idx, work in df_oeuvres.iterrows():
@@ -160,7 +161,7 @@ def work_loop(files, filter):
 		check_oeuvre_destructure = not (ideal_situation == as_int)
 		# Dans le cas où on a un recueil de poésie ou de lettres
 		number = int(re.search(regexp_multiple_works, work_id).group(1))
-		if number == 1 and contains_multiple_works is True and (check_oeuvre_destructure is True or md['type_textuel'] != "prosa" or "carta" in matieres or md["HSMS_ident"] in splits_exceptions):
+		if number == 1 and md["HSMS_ident"] not in splits and contains_multiple_works is True and (check_oeuvre_destructure is True or md['type_textuel'] != "prosa" or "carta" in matieres or md["HSMS_ident"] in no_splits):
 			print(f"Oeuvre destructurée ou Recueil de textes poétiques ou lettre identifiée sur {work_id}")
 			if number == 1:
 				# Dans ces cas là on va avoir plusieurs msItems qu'on va pouvoir renseigner

@@ -2,7 +2,7 @@ import glob
 import json
 import re
 import sys
-
+import roman
 import lxml.etree as ET
 
 namespaces = {"tei": "http://www.tei-c.org/ns/1.0"}
@@ -112,11 +112,13 @@ def structure_chapters(path):
 		current_node = first_rubric
 		for index, node in enumerate(following_siblings):
 			if node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] == 'rubrique':
+				# On filtre d'abord en vérifiant si le numéro est présent
 				regexp = re.compile(r"[ICXV]+")
 				tail = node.xpath("following::tei:lb", namespaces=namespaces)[0].tail
 				if tail is None or re.search(regexp, tail) is None:
 					print("IGNORED")
 					print(tail)
+					pass
 					localisation_dict[current_node].append(node)
 					continue
 				else:
@@ -130,8 +132,7 @@ def structure_chapters(path):
 					current_node = node
 			else:
 				localisation_dict[current_node].append(node)
-		# with open("/home/mgl/Documents/nodes.json", "w") as output_json:
-		# 	json.dump(localisation_dict, output_json)
+
 
 		parent_element = book
 		for idx, (rubric, following_nodes) in enumerate(localisation_dict.items()):
@@ -174,18 +175,74 @@ def structure_chapters(path):
 						print(ET.tostring(following_nodes[idx - 1]))
 						continue
 
-		# On va replacer les tei:hi
+		# On va replacer les tei:hi qui sont scindés sur plusieurs pages.
 		target_rubrics = parent_element.xpath("descendant::p/descendant::hi[@rend='rubrique']", namespaces=namespaces)
 		for rubrique in target_rubrics:
 			preceding_rubric = rubrique.xpath("ancestor::div[@type='chapitre']/head/hi", namespaces=namespaces)[0]
-			lb = ET.Element("lb")
-			lb.set("break", "yes")
-			preceding_rubric.set("type", "merged")
-			preceding_rubric.append(lb)
-			preceding_rubric.append(rubrique)
-			unwrap(rubrique)
+			if " ".join([item for item in preceding_rubric.itertext()])[-1] == "+":
+				lb = ET.Element("lb")
+				lb.set("break", "yes")
+				preceding_rubric.set("type", "merged")
+				preceding_rubric.append(lb)
+				preceding_rubric.append(rubrique)
+				unwrap(rubrique)
+		for chapter in book.xpath("descendant::div[@type='chapitre']", namespaces=namespaces):
+			regexp = re.compile(r"([ICXV]+)")
+			tail = chapter.xpath("descendant::p/lb", namespaces=namespaces)[0].tail
+			if tail is not None and re.search(regexp, tail):
+				identified_number = re.search(regexp, tail).group(1)
+				converted = roman.roman_to_int(identified_number)
+				as_number = int(converted)
+				if as_number == int(chapter.attrib['n']):
+					pass
+				else:
+					chapter.set("subtype", "revoir")
+	for idx, page_break in enumerate(xml_tree.xpath("descendant::pb", namespaces=namespaces)):
+		idx += 2
+		if idx < 10:
+			correct_pb = f"000{idx}"
+		elif idx < 100:
+			correct_pb = f"00{idx}"
+		elif idx < 1000:
+			correct_pb = f"0{idx}"
+		wd = "/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/HSMS-0075/"
+		page_break.set("facs", f"{wd}pg_{correct_pb}.pdf")
 	serialize(path=path, xml_tree=xml_tree)
 
+
+
+def set_page_breaks(path, base_path="/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/HSMS-0075/"):
+	"""
+	Sets the facsimile paths for page breaks in the XML tree.
+
+	Args:
+		xml_tree: The XML tree to process
+		base_path: The base path for facsimile images (default is HSMS-0075)
+	"""
+	# Find all page breaks, handling both namespaced and non-namespaced elements
+	xml_tree = ET.parse(path)
+	page_breaks = xml_tree.xpath(
+		"descendant::pb | descendant::tei:pb",
+		namespaces=namespaces
+	)
+
+	for idx, page_break in enumerate(page_breaks):
+		# Start numbering from 2 (as in the original code)
+		page_num = idx + 1
+
+		# Format the page number with leading zeros
+		if page_num < 10:
+			correct_pb = f"000{page_num}"
+		elif page_num < 100:
+			correct_pb = f"00{page_num}"
+		elif page_num < 1000:
+			correct_pb = f"0{page_num}"
+		else:
+			correct_pb = str(page_num)
+
+		# Set the facs attribute with the formatted page number
+		page_break.set("facs", f"{base_path}pg_{correct_pb}.pdf")
+	return xml_tree
 
 def serialize(path, xml_tree):
 	basename = path.split("/")[-1]
