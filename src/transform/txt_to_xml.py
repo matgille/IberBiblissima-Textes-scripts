@@ -706,7 +706,7 @@ def convert_to_xml(text, orig_text, msContents, origin, md, keep_only_work=False
 		# TODO: faire une fonction de réordonnement des lignes rubriquées
 
 		tei_file = inject_metadata(md, first_div)
-		rng_schema_path = "/home/mgl/Bureau/Travail/projets/Biblissima-Text/Transform/schemata/out/ODD_v1.rng"  # Remplacez par le chemin réel
+		rng_schema_path = "/home/mgl/Bureau/Travail/projets/Biblissima-Text/Transform/schemata/out/ODD_gold.rng"  # Remplacez par le chemin réel
 		tei_file = utils.remove_unnecesary_lb_nodes(tei_file)
 
 		if msContents is not None:

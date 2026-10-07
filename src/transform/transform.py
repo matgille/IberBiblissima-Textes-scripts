@@ -107,8 +107,8 @@ def work_loop(files, filter):
 						   aggregation_strategy="simple")
 	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="\t")
 	n = 0
-	no_splits = ["HSMS-0037", "HSMS-0190", "HSMS-0248"]
-	splits = ["HSMS-0409"]
+	no_splits = ["HSMS-0037", "HSMS-0190", "HSMS-0248", "HSMS-0122"]
+	splits = ["HSMS-0409", "HSMS-0200"]
 	skip_metadata_retrieval = False
 	previous_work = None
 	for idx, work in df_oeuvres.iterrows():

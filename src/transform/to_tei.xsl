@@ -328,8 +328,8 @@
     <!--Gloses et ajouts-->
     <xsl:template match="AD">
         <xsl:element name="seg">
-            <xsl:attribute name="type">
-                <xsl:text>addendum</xsl:text>
+            <xsl:attribute name="ana">
+                <xsl:text>#addendum</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
@@ -338,8 +338,8 @@
 
     <xsl:template match="GL">
         <xsl:element name="seg">
-            <xsl:attribute name="type">
-                <xsl:text>glose</xsl:text>
+            <xsl:attribute name="ana">
+                <xsl:text>#glose</xsl:text>
             </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>

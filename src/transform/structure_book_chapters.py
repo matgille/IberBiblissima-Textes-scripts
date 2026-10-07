@@ -68,15 +68,22 @@ def structure_book(xml_tree):
 	return xml_tree
 
 
-def structure_chapters(path):
+def structure_chapters(path, do_books:bool):
 	xml_tree = ET.parse(path)
-	xml_tree = structure_book(xml_tree)
+	if do_books is True:
+		xml_tree = structure_book(xml_tree)
 	# Problème de namespace
+	sections = xml_tree.xpath("descendant::div[@type='section'] | descendant::tei:div[@type='section']", namespaces=namespaces)
+	parts = xml_tree.xpath("descendant::div[@type='partie'] | descendant::tei:div[@type='partie']", namespaces=namespaces)
 	books = xml_tree.xpath("descendant::div[@type='livre'] | descendant::tei:div[@type='livre']", namespaces=namespaces)
+
+
 	for idx, book in enumerate(books):
 		print(f"Treating book {idx + 1}")
 		try:
-			first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)]", namespaces=namespaces)[0]
+			first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)] |  descendant::tei:hi[@rend='initiale']", namespaces=namespaces)[0]
+			# first_rubric = book.xpath("descendant::tei:g[@ref='#calderon1']", namespaces=namespaces)[0]
+			# first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)]", namespaces=namespaces)[0]
 		except IndexError:
 			print("Error")
 			# Create a default div if no rubric is found
@@ -111,20 +118,29 @@ def structure_chapters(path):
 		# for node in following_siblings:
 		current_node = first_rubric
 		for index, node in enumerate(following_siblings):
-			if node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] == 'rubrique':
+			text_content = "".join(node.xpath("self::tei:seg[@ana='#glose']/descendant::text()", namespaces=namespaces))
+			is_testigo = text_content == "testigo"
+			if is_testigo:
+				pass
+				# localisation_dict[node] = []
+				# current_node = node
+			# elif node.tag == "{http://www.tei-c.org/ns/1.0}g" and node.attrib['ref'] == "#calderon1":
+			# 	localisation_dict[node] = []
+			# 	current_node = node
+			elif node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] == 'rubrique':
+			#elif node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] in ['rubrique', 'initiale']:
 				# On filtre d'abord en vérifiant si le numéro est présent
 				regexp = re.compile(r"[ICXV]+")
 				tail = node.xpath("following::tei:lb", namespaces=namespaces)[0].tail
-				if tail is None or re.search(regexp, tail) is None:
-					print("IGNORED")
-					print(tail)
-					pass
-					localisation_dict[current_node].append(node)
-					continue
-				else:
-					print("OK")
-					print(tail)
-					pass
+				# if tail is None or re.search(regexp, tail) is None:
+				# 	print("IGNORED")
+				# 	print(tail)
+				# 	localisation_dict[current_node].append(node)
+				# 	continue
+				# else:
+				# 	print("OK")
+				# 	print(tail)
+				# 	pass
 				if node.xpath("contains(preceding-sibling::tei:hi[@rend='rubrique'][1], '+') or contains(preceding-sibling::tei:hi[@rend='rubrique'][1], '⇒')", namespaces=namespaces):
 					localisation_dict[current_node].append(node)
 				else:
@@ -133,19 +149,31 @@ def structure_chapters(path):
 			else:
 				localisation_dict[current_node].append(node)
 
-
 		parent_element = book
 		for idx, (rubric, following_nodes) in enumerate(localisation_dict.items()):
+			text_content = "".join(rubric.xpath("self::tei:seg[@ana='#glose']/descendant::text()", namespaces=namespaces))
+			is_testigo = text_content == "testigo"
 			rubric.tag = ET.QName(rubric).localname
-			subdiv = ET.Element("div")
-			parent_element.append(subdiv)
-			subdiv.set("type", "chapitre")
-			subdiv.set("n", str(idx + 1))
-			head = ET.SubElement(subdiv, "head")
-			head.append(rubric)
-			p = ET.Element("p")
-			subdiv.append(p)
-			p.extend(following_nodes)
+			if False and rubric.attrib['rend'] == 'initiale':
+			#if  is_testigo or rubric.attrib['ref'] == '#calderon1':
+				subdiv = ET.Element("div")
+				parent_element.append(subdiv)
+				subdiv.set("type", "chapitre")
+				subdiv.set("n", str(idx + 1))
+				p = ET.Element("p")
+				subdiv.append(p)
+				p.append(rubric)
+				p.extend(following_nodes)
+			else:
+				subdiv = ET.Element("div")
+				parent_element.append(subdiv)
+				subdiv.set("type", "chapitre")
+				subdiv.set("n", str(idx + 1))
+				head = ET.SubElement(subdiv, "head")
+				head.append(rubric)
+				p = ET.Element("p")
+				subdiv.append(p)
+				p.extend(following_nodes)
 
 			# Gestion des noeuds non textuels
 			for idx, node in enumerate(following_nodes):
@@ -175,28 +203,29 @@ def structure_chapters(path):
 						print(ET.tostring(following_nodes[idx - 1]))
 						continue
 
-		# On va replacer les tei:hi qui sont scindés sur plusieurs pages.
+		# On va replacer les tei:hi qui sont scindés sur plusieurs lignes.
 		target_rubrics = parent_element.xpath("descendant::p/descendant::hi[@rend='rubrique']", namespaces=namespaces)
 		for rubrique in target_rubrics:
 			preceding_rubric = rubrique.xpath("ancestor::div[@type='chapitre']/head/hi", namespaces=namespaces)[0]
-			if " ".join([item for item in preceding_rubric.itertext()])[-1] == "+":
+			joined_text = " ".join([item for item in preceding_rubric.itertext()])
+			if  re.search(r"[+⇒]\s*$", joined_text):
 				lb = ET.Element("lb")
 				lb.set("break", "yes")
 				preceding_rubric.set("type", "merged")
 				preceding_rubric.append(lb)
 				preceding_rubric.append(rubrique)
 				unwrap(rubrique)
-		for chapter in book.xpath("descendant::div[@type='chapitre']", namespaces=namespaces):
-			regexp = re.compile(r"([ICXV]+)")
-			tail = chapter.xpath("descendant::p/lb", namespaces=namespaces)[0].tail
-			if tail is not None and re.search(regexp, tail):
-				identified_number = re.search(regexp, tail).group(1)
-				converted = roman.roman_to_int(identified_number)
-				as_number = int(converted)
-				if as_number == int(chapter.attrib['n']):
-					pass
-				else:
-					chapter.set("subtype", "revoir")
+		# for chapter in book.xpath("descendant::div[@type='chapitre']", namespaces=namespaces):
+		# 	regexp = re.compile(r"([ICXV]+)")
+		# 	tail = chapter.xpath("descendant::p/lb", namespaces=namespaces)[0].tail
+		# 	if tail is not None and re.search(regexp, tail):
+		# 		identified_number = re.search(regexp, tail).group(1)
+		# 		converted = roman.roman_to_int(identified_number)
+		# 		as_number = int(converted)
+		# 		if as_number == int(chapter.attrib['n']):
+		# 			pass
+		# 		else:
+		# 			chapter.set("subtype", "revoir")
 	for idx, page_break in enumerate(xml_tree.xpath("descendant::pb", namespaces=namespaces)):
 		idx += 2
 		if idx < 10:
@@ -206,7 +235,7 @@ def structure_chapters(path):
 		elif idx < 1000:
 			correct_pb = f"0{idx}"
 		wd = "/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/HSMS-0075/"
-		page_break.set("facs", f"{wd}pg_{correct_pb}.pdf")
+		# page_break.set("facs", f"{wd}pg_{correct_pb}.pdf")
 	serialize(path=path, xml_tree=xml_tree)
 
 
@@ -246,7 +275,7 @@ def set_page_breaks(path, base_path="/home/mgl/Bureau/Travail/projets/Biblissima
 
 def serialize(path, xml_tree):
 	basename = path.split("/")[-1]
-	out_path = f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/structured/{basename}"
+	out_path = f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/structured/struct.{basename}"
 	print(f"Writing to {out_path}")
 	with open(out_path, "w") as output_xml:
 		output_xml.write(ET.tostring(xml_tree, pretty_print=True, encoding="utf8").decode("utf8"))
@@ -256,4 +285,5 @@ def serialize(path, xml_tree):
 
 if __name__ == '__main__':
 	path = sys.argv[1]
-	structure_chapters(path)
+	is_book = True if sys.argv[2] == "True" else False
+	structure_chapters(path, do_books=is_book)
