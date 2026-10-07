@@ -1,0 +1,2360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+   xmlns:sch="http://purl.oclc.org/dsdl/schematron" xml:lang="fr">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title type="short">(iBer)Biblissima-Textes</title>
+            <title>Un projet de constitution de corpus numérique d'oeuvres
+               patrimoniales ibériques</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Unpublished first draft </p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Dérivé d'un subset de plusieurs documents XML-TEI de genres
+               distincts (prose, poésie, théâtre).</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <div1 type="documentation">
+            <head>Documentation du projet iBerBiblissima-Textes</head>
+            <p>Ce fichier documente les choix d'encodage du projet
+               (Iber)Biblissima-Textes.</p>
+            <p><emph>Attention</emph>: les exemples donnés dans la documentation
+               sont adaptés pour des raisons de lisibilité: seul l'élément
+               duquel il est question dans la section apparaît dans l'exemple;
+               le reste des éléments est omis.</p>
+            <div2>
+               <head>Principes généraux</head>
+               <p>Le corpus proposé provient du Hispanic Seminary of Medieval
+                  Studies de Madison. Il a été converti en XML-TEI à la fois
+                  automatiquement et manuellement pour la structuration fine des
+                  oeuvres.</p>
+               <p>L'orientation du projet est celle de l'oeuvre: chaque document
+                  XML-TEI contient un témoin textuel (en anglais
+                     <foreign>textual witness</foreign>), à savoir la
+                  matérialisation d'une oeuvre dans un témoin particulier, qu'il
+                  soit manuscrit ou imprimé. En ce sens, l'orientation diffère
+                  de la source OSTA, dans laquelle chaque document TXT vient
+                  décrire le contenu entier d'un témoin manuscrit ou
+                  imprimé.</p>
+            </div2>
+            <div2>
+               <head>Métadonnées et orientation bibliographique</head>
+               <div3>
+                  <head>La déclaration du système de référence
+                        (<gi>refsDecl</gi>)</head>
+                  <p>Voir ici avec Thibault</p>
+               </div3>
+               <div3>
+                  <head>Titre et niveaux de responsabilité éditoriale</head>
+                  <p>Ces informations sont indiquées au niveau du
+                        <gi>titleStmt</gi>, à l'aide des éléments <gi>title</gi>
+                     et <gi>respStmt</gi>.</p>
+                  <p>Si le titre du document, qui correspond au titre de
+                     l'oeuvre transcrite,, et la responsabilité de la
+                     transcription s'adaptent à chaque oeuvre, les trois
+                        <gi>respStmt</gi> correspondant à la responsabilité du
+                     projet original (OSTA-HSMS), à sa structuration et à la
+                     responsabilité du projet Biblissima-Texte sont immuables et
+                     se retrouveront dans l'ensemble des documents XML-TEI
+                     produits: <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <titleStmt>
+                           <title>General estoria 1</title>
+                           <respStmt>
+                              <resp>Transcrit par</resp>
+                              <name>
+                                 <surname>Kasten</surname>
+                                 <forename>Lloyd A.</forename>
+                              </name>
+                              <name>
+                                 <surname>Nitti</surname>
+                                 <forename>John</forename>
+                              </name>
+                              <name>
+                                 <surname>Jonxis-Henkemans</surname>
+                                 <forename>Wilhelmina</forename>
+                              </name>
+                           </respStmt>
+                           <respStmt>
+                              <resp>Textes édités et rassemblés par </resp>
+                              <name>
+                                 <forename>Francisco</forename>
+                                 <surname>Gago Jover</surname>
+                              </name>
+                              <name>
+                                 <forename>Javier</forename>
+                                 <surname>Pueyo Mena</surname>
+                              </name>
+                           </respStmt>
+                           <respStmt>
+                              <resp>Modélisation, encodage et structuration
+                                 XML-TEI par</resp>
+                              <name>
+                                 <forename>Matthias</forename>
+                                 <surname>Gille Levenson</surname>
+                              </name>
+                           </respStmt>
+                           <respStmt>
+                              <resp>Responsabilité du projet Biblissima-Textes: </resp>
+                              <name>
+                                 <forename>Thibault</forename>
+                                 <surname>Clérice</surname>
+                              </name>
+                              <name>
+                                 <forename>Olivier</forename>
+                                 <surname>Brisville-Fertin</surname>
+                              </name>
+                              <name>
+                                 <forename>Ariane</forename>
+                                 <surname>Pinche</surname>
+                              </name>
+                              <name>
+                                 <forename>Marianne</forename>
+                                 <surname>Reboul</surname>
+                              </name>
+                           </respStmt>
+                        </titleStmt>
+                     </egXML></p>
+               </div3>
+               <div3>
+                  <head>Description du document source</head>
+                  <p>Le teiHeader de chaque document vient indiquer à l'aide
+                     d'un élément <gi>bibl</gi> de type
+                        <val>source-transcription</val> les informations
+                     relatives au document TXT source. Les porteurs du projet,
+                     OSTA, sont immutables, seule change le nom du fichier, la
+                     date et la version du corpus: <egXML
+                        xmlns="http://www.tei-c.org/ns/Examples"><bibl
+                           xml:id="GE1" type="source-transcription">
+                           <title>TEXT.GE1.txt</title>
+                           <editor>
+                              <forename>Francisco</forename>
+                              <surname>Gago Jover</surname>
+                           </editor>
+                           <editor>
+                              <forename>Javier</forename>
+                              <surname>Pueyo Mena</surname>
+                           </editor>
+                           <publisher>Hispanic Seminary of Medieval
+                              Studies</publisher>
+                           <date when="2026-03-07"/>
+                           <availability status="restricted">
+                              <licence
+                                 target="http://creativecommons.org/licenses/by-nc-sa/4.0/"
+                                 >Creative Commons Attribution Non Commercial
+                                 Share Alike 4.0 International</licence>
+                           </availability>
+                           <note>Projet OSTA (Old Spanish Textual Archive).
+                              Source des données: <ptr
+                                 target="https://raw.githubusercontent.com/hispanicseminary/OSTA/refs/heads/main/transcriptions/TEXT.GE1.txt"
+                              />, v 1.0.</note>
+                        </bibl></egXML></p>
+               </div3>
+               <div3 xml:id="referentiels">
+                  <head>Référentiels utilisés</head>
+                  <p>Les entités (personnes, lieux, cotes de manuscrits,
+                     bibliothèques, oeuvres, réalisations d'oeuvre, exemplaires,
+                     témoins textuels) sont, tant que faire se peut, identifiés
+                     à l'aide d'identifiants de bases de données standards. Le
+                     projet vise, entres autres, à reliers quatre référentiels
+                     principaux: <list>
+                        <item>Le référentiel Biblissima+</item>
+                        <item>Le référentiel BETA Philobiblon (Bibliografía
+                           Española de Textos Antiguos)</item>
+                        <item>Le référentiel Factgrid</item>
+                        <item>Le référentiel OSTA/HSMS</item>
+                     </list>Des référentiels secondaires sont proposés quand les
+                     identifiants existent: <list>
+                        <item>ISTC</item>
+                        <item>VIAF</item>
+                        <item>BNE</item>
+                        <item>BNF</item>
+                     </list></p>
+                  <p>L'élément <gi>idno</gi> vient indiquer un identifiant
+                     spécifique de l'élément parent, et un attribut
+                        <att>corresp</att> propose soit l'IRI complet de
+                     l'entité: <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <bibl ana="#frbr.work" type="work">
+                           <!-- ...-->
+                           <idno type="factgrid-id"
+                              corresp="https://database.factgrid.de/entity/Q1083374"
+                              >Q1083374</idno>
+                           <!--...-->
+                        </bibl></egXML> soit une référence à l'IRI de l'entité
+                     référée dans l'élément: <egXML
+                        xmlns="http://www.tei-c.org/ns/Examples">
+                        <bibl ana="#frbr.work" type="work">
+                           <!-- ...-->
+                           <author
+                              corresp="https://database.factgrid.de/entity/Q266835"
+                                 ><surname>Alfonso X el
+                              Sabio</surname><forename/>
+                           </author>
+                           <!--...-->
+                        </bibl></egXML>.</p>
+                  <p>Un identifiant vide signifie l'absence d'entité dans le
+                     référentiel indiqué.</p>
+               </div3>
+               <div3>
+                  <head>Le <gi>sourceDesc</gi> et l'influence de la FRBR</head>
+                  <p>La modélisation FRBR<note>Ajouter une référence.</note> a
+                     une influence forte sur la structuration des métadonnées du
+                     corpus: tant que faire se peut, nous tâchons de proposer
+                     une description des sources depuis l'oeuvre
+                        (<foreign>work</foreign>) jusqu'à sa réalisation
+                     matérielle, l'<foreign>item</foreign>.</p>
+                  <div4>
+                     <head>Références à la modélisation FRBR</head>
+                     <p>Le corpus s'organise en suivant de façon schématique la
+                        modélisation FRBR en Oeuvre, Expression (versions,
+                        adaptations, traductions), Manifestation (éditions
+                        imprimées) et Item/singleton (exemplaire imprimé, témoin
+                        manuscrit).</p>
+                     <p>La référence à cette modélisation est faite dans une
+                        typologie spécifique: <egXML
+                           xmlns="http://www.tei-c.org/ns/Examples"><taxonomy
+                              xml:id="frbr"
+                              sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/">
+                              <bibl>
+                                 <title>Catégories FRBRoo</title>
+                              </bibl>
+                              <category xml:id="frbr.work"
+                                 sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/F1">
+                                 <catDesc>Work</catDesc>
+                              </category>
+                              <category xml:id="frbr.expression"
+                                 sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/F2">
+                                 <catDesc>Expression</catDesc>
+                              </category>
+                              <category xml:id="frbr.manifestation"
+                                 sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/F3">
+                                 <catDesc>Manifestation</catDesc>
+                              </category>
+                              <category xml:id="frbr.manifestation_singleton"
+                                 sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/F4">
+                                 <catDesc>Manifestation Singleton</catDesc>
+                              </category>
+                              <category xml:id="frbr.item"
+                                 sameAs="http://iflastandards.info/ns/fr/frbr/frbroo/F5">
+                                 <catDesc>Item</catDesc>
+                              </category>
+                           </taxonomy></egXML></p>
+                  </div4>
+                  <div4>
+                     <head>Description de l'oeuvre</head>
+                     <p>L'oeuvre, en tant qu'entité abstraite à laquelle on
+                        rattache un témoin textuel, sera décrite à l'aide d'un
+                        élément <gi>bibl</gi>, dont l'analyse renvoie au concept
+                        du même nom de la formalisation FRBR. Les éléments
+                        principaux renseignés sont: <list>
+                           <item>Le titre</item>
+                           <item>L'auteur (qui sera indiqué même en cas
+                              d'anonyme)</item>
+                           <item>La date</item>
+                           <item>L'identifiant de l'oeuvre selon les différents
+                              référentiels disponibles (voir <ref
+                                 target="#referentiels">la section
+                                 suivante</ref>).</item>
+                        </list><egXML xmlns="http://www.tei-c.org/ns/Examples"
+                              ><bibl ana="#frbr.work" type="work">
+                              <title>General estoria 1</title>
+                              <author
+                                 corresp="https://database.factgrid.de/entity/Q266835"
+                                    ><surname>Alfonso X el
+                                 Sabio</surname><forename/></author><date
+                                 cert="medium" notBefore-iso="1272"
+                                 notAfter-iso="1284">1272 ca. - 1284 ad
+                                 quem</date>
+                              <idno type="HSMS-WORK">HSMS-0075-0001</idno>
+                              <idno type="beta-texid">1008</idno>
+                              <idno type="factgrid-id"
+                                 corresp="https://database.factgrid.de/entity/Q1083374"
+                                 >Q1083374</idno>
+                              <idno type="biblissima-id"/>
+                              <idno type="BNF-id"/>
+                              <idno type="BNE-id"/>
+                              <idno type="VIAF-id"/>
+                           </bibl></egXML></p>
+                  </div4>
+                  <div4>
+                     <head>Description de l'expression (traductions,
+                        translations, adaptations)</head>
+                     <p>Les oeuvres adaptées, par des versions, des translations
+                        ou des traductions sont décrites dans un <gi>bibl</gi>
+                        spécifique qui renvoie au concept
+                           d'<val>expression</val>: <egXML
+                           xmlns="http://www.tei-c.org/ns/Examples"><bibl
+                              type="translation" ana="#frbr.expression">
+                              <title>Libro de Alexandre</title>
+                              <author>
+                                 <surname>desconocido</surname>
+                                 <forename/>
+                              </author>
+                              <date atLeast="1221" atMost="1223">1221 a quo-
+                                 1223 ad quem</date>
+                              <idno type="HSMS-WORK">HSMS-0089-0001</idno>
+                              <idno type="beta-texid">1221</idno>
+                              <idno type="factgrid-id"
+                                 corresp="https://database.factgrid.de/entity/Q1083547"
+                                 >Q1083547</idno>
+                              <idno type="biblissima-id"/>
+                           </bibl></egXML></p>
+                  </div4>
+                  <div4>
+                     <head>Description des éditions imprimées</head>
+                     <p>L'élément <gi>biblStruct</gi> est utilisé pour décrire
+                        les éditions imprimées: <egXML
+                           xmlns="http://www.tei-c.org/ns/Examples"><biblStruct
+                              type="edition" ana="#frbr.manifestation">
+                              <monogr>
+                                 <idno type="ISTC"/>
+                                 <idno type="OCLC">776437747</idno>
+                                 <title>FArsas y Eglogas al modo y estilo
+                                    pastoril y castellano Fechas por Lucas
+                                    fernandez Salmantino Nueuamente
+                                    impressas</title>
+                                 <imprint>
+                                    <pubPlace>Salamanca</pubPlace>
+                                    <publisher>Lorenzo de Liomdedei</publisher>
+                                    <date when="1514-11-10">1514-11-10</date>
+                                 </imprint>
+                              </monogr>
+                           </biblStruct></egXML></p>
+                     <p>Le titre correspond ici au titre de l'imprimé tel que
+                        catalogué et provenant par exemple d'une page de
+                        titre.</p>
+                  </div4>
+                  <div4>
+                     <head>Description du témoin manuscrit ou imprimé</head>
+                     <div5>
+                        <head>Exemplaire imprimé</head>
+                        <p><egXML xmlns="http://www.tei-c.org/ns/Examples"
+                                 ><msDesc ana="#frbr.item">
+                                 <msIdentifier
+                                    facs="http://bdh.bne.es/bnesearch/detalle/bdh0000064193">
+                                    <settlement>Madrid</settlement>
+                                    <!--Un identifiant de biblioth&#232;que id&#233;alement-->
+                                    <repository
+                                       corresp="https://database.factgrid.de/entity/Q390927"
+                                       >Biblioteca Nacional de
+                                       España</repository>
+                                    <!--Un identifiant de biblioth&#232;que id&#233;alement-->
+                                    <idno type="cote">R/9018</idno>
+                                    <idno type="HSMS-ID">HSMS-0409</idno>
+                                    <idno type="factgrid-id"
+                                       corresp="https://database.factgrid.de/entity/Q1041823"
+                                       >Q1041823</idno>
+                                    <idno type="biblissima-id"/>
+                                    <!--Manuscrit-->
+                                    <idno type="beta-manid"
+                                       corresp="https://philobiblon.upf.edu/xtf/servlet/org.cdlib.xtf.dynaXML.DynaXML?source=/unified/Display/4189BETA.MsEd.xml&amp;style=MsEd.xsl"
+                                       >4189</idno>
+                                    <msName>Ed.: Madrid: Nacional (BNE), R/9018.
+                                       Salamanca: Lorenzo de Liomdedei,
+                                       1514-11-10. Lucas Fernández, Comedia de
+                                       Bras-Gil, escrito 1496.</msName>
+                                 </msIdentifier>
+                                 <msContents>
+                                    <msItem xml:id="HSMS-0409-0004">
+                                       <locus>11r-16v</locus>
+                                       <idno type="beta-cnum">7488</idno>
+                                       <idno type="factgrid-cnum"
+                                        corresp="https://database.factgrid.de/entity/Q1050633"
+                                        >Q1050633</idno>
+                                       <incipit/>
+                                       <explicit/>
+                                       <colophon/>
+                                    </msItem>
+                                 </msContents>
+                              </msDesc></egXML></p>
+                     </div5>
+                     <div5>
+                        <head>Témoin manuscrit</head>
+                        <p><egXML xmlns="http://www.tei-c.org/ns/Examples"
+                                 ><msDesc ana="#frbr.manifestation_singleton">
+                                 <msIdentifier
+                                    facs="https://digitalcollections.nypl.org/items/c60485e0-e803-0130-4cb7-58d385a7b928">
+                                    <settlement>New York</settlement>
+                                    <repository>Public Library</repository>
+                                    <idno type="cote">MssCol 2570</idno>
+                                    <idno type="HSMS-ID">HSMS-0537</idno>
+                                    <idno type="factgrid-id"/>
+                                    <idno type="biblissima-id"/>
+                                    <idno type="beta-manid"/>
+                                    <idno type="beta-copid"/>
+                                    <msName/>
+                                 </msIdentifier>
+                                 <history>
+                                    <origin>
+                                       <origDate corresp="#HSMS-0537-0001"
+                                        when="1596-10-26">1596-10-26</origDate>
+                                    </origin>
+                                 </history>
+                                 <msContents>
+                                    <msItem xml:id="HSMS-0537-0001">
+                                       <locus>1r-160r</locus>
+                                       <idno type="beta-cnum"/>
+                                       <idno type="factgrid-cnum"/>
+                                       <incipit/>
+                                       <explicit/>
+                                       <colophon/>
+                                    </msItem>
+                                 </msContents>
+                              </msDesc></egXML></p>
+                        <p>L'histoire de chaque unité codicologique peut être
+                           indépendantes, en cas de recueil. Dans
+                              <gi>history</gi>/<gi>origin</gi>, un élément
+                              <gi>origDate</gi> propre à chaque unité
+                           codicologique vient en donner la date de production.
+                           Le contenu de chaque unité est lui indiqué dans un
+                              <gi>msContent</gi>/<gi>msItem</gi>, avec un
+                           incipit, un explicit et le colophon indiqué, quand
+                           l'information est disponible. Le lien entre la date
+                           et la description du manuscrit est fait à l'aide de
+                           l'identifiant de l'unité textuelle, qui correspond à
+                           l'identifiant HSMS-WORK.1</p>
+                     </div5>
+                  </div4>
+                  <div4>
+                     <head>Dates</head>
+                     <p>Les dates sont exprimées au format YYYY-MM-DD. Elles
+                        sont exprimées dans un <gi>origDate</gi> et dans divers
+                        éléments <gi>date</gi>. Les attributs utilisés sont: <list>
+                           <item><att>when</att> quand la certitude de la date
+                              est totale: <egXML
+                                 xmlns="http://www.tei-c.org/ns/Examples">
+                                 <date when="1514-11-10"
+                                 >1514-11-10</date></egXML></item>
+                           <item><att>notBefore-iso</att> et
+                                 <att>notAfter-iso</att> pour des dates
+                                 <foreign>a quo</foreign> et <foreign>ante
+                                 quem</foreign>: <egXML
+                                 xmlns="http://www.tei-c.org/ns/Examples">
+                                 <date notBefore-iso="1663" notAfter-iso="1725"
+                                    >1663 - 1725</date></egXML></item>
+                           <item>Un attribut de certitude vient marquer
+                              l'incertitude sur l'ensemble de la date (il n'est
+                              pas possible d'exprimer la certitude sur un des
+                              attributs), quand
+                                 <quote><foreign>ca.</foreign></quote> ou
+                                 <quote>?</quote> apparaît dans la date dans les
+                              catalogues: <egXML
+                                 xmlns="http://www.tei-c.org/ns/Examples"><date
+                                    cert="medium" notBefore-iso="1272"
+                                    notAfter-iso="1284">1272 ca. - 1284 ad
+                                    quem</date></egXML></item>
+                        </list></p>
+                  </div4>
+                  <div4>
+                     <head>Entités nommées</head>
+                     <p>Les noms de personne et de lieux sont indiqués de façon
+                        standard à la TEI. Une identification standard est
+                        proposée quand l'entité existe dans un des référentiels
+                        utilisés. Les éléments <gi>name</gi>, <gi>forename</gi>,
+                           <gi>surname</gi> et <gi>roleName</gi> sont
+                        utilisés.</p>
+                  </div4>
+               </div3>
+            </div2>
+            <div2>
+               <head>Normes de transcription</head>
+               <div3>
+                  <head>Principes généraux de transcription</head>
+                  <p>La transcription du projet HSMS-OSTA est de type <hi
+                        rend="bold">graphématique</hi>: est systématiquement
+                     opérée une réduction des allographes au graphème subjacent.
+                     Quelques documents proposent une exception à ce schéma, en
+                     distinguant un certain nombre de réalisations allographes
+                     du même graphème. Ces réalisations sont normalisées à
+                     l'aide des éléments de la TEI adhoc (voir plus bas).</p>
+               </div3>
+               <div3>
+                  <head>Abréviations</head>
+                  <p>Les abréviations sont développées directement à l'aide d'un
+                     élément <gi>ex</gi>. La réalisation originelle de
+                     l'abréviation n'est pas indiquée: <egXML
+                        xmlns="http://www.tei-c.org/ns/Examples">fasta
+                           q<ex>ue</ex> busca<ex>n</ex>do mas en este
+                        saber.</egXML></p>
+                  <p>Gestions des superscripts. Transformer les superscripts en
+                     abréviations.</p>
+               </div3>
+               <div3>
+                  <head>Interventions éditoriales</head>
+                  <div4>
+                     <head>Altération du texte source</head>
+                     <p>Les interventions éditoriales sur le texte sont
+                        indiquées à l'aide d'un élément <gi>choice</gi>: <list>
+                           <item>dans le cas d'une correction, un jeu d'éléments
+                                 <gi>sic</gi> et <gi>corr</gi> vient indiquer le
+                              texte présent dans le témoin et sa correction par
+                                 l'éditeur<note>TODO: les espaces ne sont pas
+                                 des corrections mais des régularisations.
+                                 Revoir</note>: <egXML
+                                 xmlns="http://www.tei-c.org/ns/Examples">Mas
+                                 agora dexa la estoria a fablar desto &amp;
+                                 torna a co<choice>
+                                    <sic>r</sic>
+                                    <corr/>
+                                 </choice>n<choice>
+                                    <corr>t</corr>
+                                    <sic/>
+                                 </choice>ar commo ysca
+                              mjramomelin</egXML></item>
+                           <item>dans le cas d'une normalisation, les éléments
+                                 <gi>orig</gi> et <gi>reg</gi> sont utilisés:
+                                 <egXML xmlns="http://www.tei-c.org/ns/Examples"
+                                 >&amp; desy enbiolos allen mar &amp; fi<choice>
+                                    <orig>ƽ</orig>
+                                    <reg>z</reg>
+                                 </choice>olos alla descabeçar </egXML></item>
+                        </list></p>
+                  </div4>
+                  <div4>
+                     <head>Notes éditoriales</head>
+                     <p>En raison de l'histoire des documents dont la production
+                        a été réalisée par plusieurs mains, la responsabilité de
+                        la <gi>note</gi> doit être systématiquement indiquée,
+                        afin de distinguer les notes produites par la personne
+                        en charge de la transcription de la source, de la note
+                        produite par le responsable de l'édition numérique. Un
+                        attribut <att>resp</att> est donc obligatoire: <egXML
+                           xmlns="http://www.tei-c.org/ns/Examples">ca lo el
+                           robo e tomo injusta mente &amp; non devida mente <del
+                              hand="#self">v<ex>uest</ex>ro marido</del>
+                           <note resp="#transcriptor">strike-out above
+                              line.</note> sin mi licencia e mandado de mi
+                           propia fazienda e patrimonio</egXML>
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples"><div
+                              type="chapitre" n="5">
+                              <head><hi rend="rubrique">Cap<ex>itul</ex><hi
+                                       rend="superscript">o</hi> XII.</hi>
+                              </head>
+                              <p><lb break="yes"/><hi rend="initiale" n="1"
+                                    >E</hi>n el cast<ex>ill</ex><hi
+                                    rend="superscript">o</hi> de
+                                    Mont<ex>alvan</ex><note resp="#mgl">Je
+                                    n'identifie pas les chapitre 6 à 11; le
+                                    facsimilé n'est pas accessible à l'heure où
+                                    j'écris cette note (octobre 2026).</note> no
+                                 se hallo <!--...-->
+                              </p></div></egXML></p>
+                  </div4>
+               </div3>
+            </div2>
+            <div2>
+               <head>Description matérielle des sources</head>
+               <p>Les sources sont précisément décrites sur le plan matériel,
+                  avec une modalité diplomatique. Les changements de page, de
+                  colonne et de ligne sont indiqués à l'aide des éléments
+                     <gi>pb</gi>, <gi>cb</gi> et <gi>lb</gi>.</p>
+               <p>L'élément <gi>fw</gi> vient indiquer:<list>
+                     <item>Les titres courants: <egXML
+                           xmlns="http://www.tei-c.org/ns/Examples"><pb n="1r"/>
+                           <fw rend="titre-courant">GENESIS <lb break="yes"
+                                 />L<ex>IBRO</ex> I</fw></egXML></item>
+                     <item>Les réclames</item>
+                  </list></p>
+               <div3>
+                  <head>Altération du livre</head>
+                  <p>Les pages manquantes sont annotées à l'aide de l'élément
+                        <gi>gap</gi>.</p>
+               </div3>
+               <div3>
+                  <head>(Sous-)mots altéré</head>
+                  <p>Les éléments <gi>gap</gi> et <gi>supplied</gi> décrivent
+                     les mots de la source manquants ou illisibles.</p>
+               </div3>
+            </div2>
+            <div2>
+               <head>Description des éléments non textuels</head>
+               <p>Les éléments non textuels sont indiqués à l'aide de l'élément
+                     <gi>figure</gi>. Le zonage de l'élément n'est pas produit
+                  et n'est pas représenté.</p>
+               <div3>
+                  <head>Figures</head>
+                  <p>Les figures sont de deux types possibles, selon la
+                     classification de OSTA. <list>
+                        <item><val>illumination</val> (une figure contenant
+                           n'importe quelle élément graphique, ne pouvant pas
+                           être considéré comme un diagramme, et n'ayant pas de
+                           lien sémantique avec le texte) <egXML
+                              xmlns="http://www.tei-c.org/ns/Examples"><figure
+                                 type="illumination">
+                                 <ab><hi rend="rubrique"><hi rend="initiale"
+                                        n="1">A</hi>q<ex>u</ex><hi
+                                        rend="superscript">i</hi> se
+                                        comie<ex>n</ex>ça <lb break="yes"/>la
+                                       general &amp; gra<ex>n</ex>d es<lb
+                                        break="no"/>toria q<ex>ue</ex> el muy
+                                       noble Rey <lb break="yes"/>don
+                                        alfon<ex>so</ex> fijo del noble Rey <lb
+                                        break="yes"/>don ferna<ex>n</ex>do &amp;
+                                        d<ex>e</ex>la Reyna <lb break="yes"
+                                        />don<ex>n</ex>a beat<ex>r</ex><hi
+                                        rend="superscript">i</hi>z
+                                       ma<ex>n</ex>do fazer. <lb break="yes"
+                                       />Prologo.</hi></ab>
+                              </figure></egXML></item>
+                        <item><val>miniature</val> (une figure avec illustration
+                           venant représenter tout ou élément du texte: <egXML
+                              xmlns="http://www.tei-c.org/ns/Examples"><div>
+                                 <p><pb n="1r"/>
+                                    <pb n="1v"/>
+                                    <lb break="yes"/><cb type="single-column"
+                                       /><lb break="yes"/>
+                                    <figure type="miniature">
+                                       <ab>DON FILIPE.</ab>
+                                    </figure>
+                                    <pb n="2r"/>
+                                    <lb break="yes"/><cb type="single-column"
+                                       /><lb break="yes"/><figure
+                                       type="miniature">
+                                       <ab>POR LA GR<ex>ACI</ex>A DE DIOS.</ab>
+                                    </figure>
+                                    <pb n="2v"/>
+                                    <lb break="yes"/><cb type="single-column"
+                                       /><lb break="yes"/><figure
+                                       type="miniature">
+                                       <ab>REI DE CASTILLA.</ab>
+                                    </figure>
+                                    <pb n="3r"/></p>
+                              </div></egXML></item>
+                     </list>
+                  </p>
+               </div3>
+               <div3>
+                  <head>Diagrammes</head>
+                  <p>Les diagrammes (figures contenant une représentation
+                     schématique d'un objet, et pouvant contenir du texte) sont
+                     représentées par des éléments <gi>div</gi> de type
+                        <val>diagramme</val></p>
+               </div3>
+            </div2>
+            <div2>
+               <head>Structure</head>
+               <p>Étant donné la taille du corpus, la structuration et
+                  l'annotation du corpus est minimale, afin de faciliter la
+                  navigation en son sein.</p>
+               <p>Trois genres sont distingués: la prose, le théâtre et la
+                  poésie, et les modules correspondants de la TEI sont utilisés.
+                  L'épistolaire est modélisé comme de la prose, car les textes
+                  de lettres sont trop hétérogènes pour être traités de façon
+                  distincte et unitaire.</p>
+               <div3>
+                  <head>Texte principal et paratextes</head>
+                  <p>Les éléments <gi>front</gi>, <gi>body</gi> et <gi>back</gi>
+                     sont utilisés pour marquer les différents éléments du
+                     texte.</p>
+               </div3>
+               <div3>
+                  <head>Structure logique. Divisions et sections</head>
+                  <p>L'unité de structure de base est l'élément <gi>div</gi> non
+                     numéroté. Le typage de ces divisions est obligatoire. Une
+                     volonté de standardisation est à l'oeuvre: la
+                     classification des divisions est volontairement générique. </p>
+                  <p>La page de titre est considérée comme une division
+                     standard. l'élément <gi>titlePage</gi> n'est pas utilisé
+                     pour éviter une complication excessive de l'encodage.</p>
+                  <p>La classification de <gi>div</gi> est fixée. Les types
+                     communs à tous les genres sont les suivants: <list>
+                        <item>sommaire</item>
+                        <item>page_titre</item>
+                        <item>colophon</item>
+                        <item>epilogue</item>
+                        <item>prologue</item>
+                        <item><val>main</val>: utilisé dans le <gi>body</gi>,
+                           permet d'indiquer que le texte est le texte principal
+                           en cas de présence d'un texte annexe qui n'appartient
+                           pas sémantiquement au <gi>back</gi>. Il sera utilisé
+                           conjointement avec une division de type
+                              <val>addendum</val>, par exemple.</item>
+                        <item><val>addendum</val></item>
+                        <item><val>autre</val>: la classe neutre: toute division
+                           qui ne peut être classée dans une des classes
+                           antérieures est de type <val>autre</val>.</item>
+                     </list> Pour les oeuvres dramatiques: <list>
+                        <item>scene</item>
+                        <item>acte</item>
+                     </list>Pour la poésie: <list>
+                        <item>poeme</item>
+                     </list> Pour la prose, la classification canonique est la suivante<list>
+                        <item>livre</item>
+                        <item>partie</item>
+                        <item>chapitre</item>
+                     </list> Pour les éléments structurels qui ne correspondent
+                     pas à cette classification, on utilisera: <list>
+                        <item>section</item>
+                        <item>sous-section</item>
+                        <item>sous-sous-section</item>
+                     </list></p>
+                  <p>Les sommaires pourront être structurés à l'aide de
+                     listes.</p>
+               </div3>
+               <div3>
+                  <head>Fin de sections explicites et colophon</head>
+                  <p>Les indications de fins d'unités textuelles sont annotées à
+                     l'aide de l'élément <gi>trailer</gi>, comme dernier enfant
+                     de la section en cours: <egXML
+                        xmlns="http://www.tei-c.org/ns/Examples"><trailer><lb
+                              break="yes"/>Fin dela primera <lb break="yes"
+                           />parte.</trailer></egXML> Le colophon d'un texte est
+                     marqué <hi rend="bold">dans le <gi>back</gi></hi> à l'aide
+                     d'une division typée: il y aura donc possiblement à la fois
+                     un <gi>trailer</gi> et un colophon marqués différemment:
+                        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <body>
+                           <div type="partie">
+                              <!--...-->
+                           </div>
+                           <trailer><g ref="#calderon1"/>Fin. </trailer>
+                        </body>
+                        <back><div type="colophon"><g ref="#calderon1"/> A loor
+                              &amp; gloria de dios todo poderoso: y de su
+                              bendita madre n<ex>uest</ex>ra señora la
+                                 virge<ex>n</ex> maria se acabo la presente obra
+                              llamada reprehe<ex>n</ex>sion de jugadores: hecha
+                              y copilada por el doctor Castillo vezino dela
+                              villa de Molina. Acabose de<choice>
+                                 <corr>&#160;</corr>
+                                 <sic/>
+                              </choice>imprimir enla muy noble &amp; muy leal
+                              villa de Ualladolid: por maestre Nicolas tyerri. A
+                              xviij. de Abril de. M .D. xxviij. años.
+                           </div></back>
+                     </egXML></p>
+               </div3>
+               <div3>
+                  <head>Structure intellectuelle. Ajouts et gloses</head>
+                  <p>L'élément <gi>seg</gi> est utilisé pour marquer des
+                     segments annotés de façon spécifique et propre au projet
+                     d'origine du HSMS: <list>
+                        <item>Les fragments glosés sont indiqué à l'aide d'un
+                              <gi>seg</gi> dont l'attribut <att>ana</att> est de
+                           valeur <val>#glose</val>: <egXML
+                              xmlns="http://www.tei-c.org/ns/Examples">Deueys
+                              señores los que teneys carga de administrar
+                              justicia &amp; regir los pueblos de notar: lo que
+                              dize nuestro dios &amp; señor por Ezechiel.
+                                 <foreign xml:lang="lat"><seg ana="#glose"><add
+                                       hand="#self">ijj.
+                                 capi.</add></seg></foreign></egXML></item>
+                        <item>Les fragments correspondants à des
+                              <foreign>addenda</foreign> sont indiqué à l'aide
+                           d'un <gi>seg</gi> dont l'attribut <att>ana</att> est
+                           de valeur <val>#addendum</val></item>
+                     </list> Ces pointeurs renvoie vers la description précise
+                     de ces classes dans la typologie: <egXML
+                        xmlns="http://www.tei-c.org/ns/Examples"><taxonomy>
+                           <bibl>
+                              <title>Catégories de segments annotés</title>
+                           </bibl>
+                           <category xml:id="glose">
+                              <catDesc>Segment glosé</catDesc>
+                           </category>
+                           <category xml:id="addendum">
+                              <catDesc>Ajout intellectuel</catDesc>
+                           </category>
+                        </taxonomy></egXML></p>
+               </div3>
+               <div3>
+                  <head>Prose</head>
+                  <p>La structure minimal est le paragraphe. Les paragraphes ne
+                     sont pas marqués, sauf exception.</p>
+               </div3>
+               <div3>
+                  <head>Vers</head>
+                  <p>Les strophes sont annotées au cas par cas; le degré de
+                     précision dans l'encodage est précisé dans l'en-tête du
+                     document XML-TEi. Exemple: Alexandre, on encode les
+                     strophes sans les typer, car il peut y avoir des pertes de
+                     vers. Exemple: dans le théatre, Gil Blas, les strophe ne
+                     sont pas indiquées.</p>
+               </div3>
+               <div3>
+                  <head>Théâtre</head>
+                  <p>La structuration en scènes et en actes est indiquée quand
+                     cela est explicité dans le texte.</p>
+               </div3>
+            </div2>
+            <div2>
+               <head>Notes éditoriales</head>
+               <p>Les notes éditoriales sont indiquées à l'aide de l'élément
+                     <gi>note</gi>.</p>
+            </div2>
+            <div2>
+               <head>Relation texte-image</head>
+               <p>Le projet est orienté texte et ne prévoit pas de lien entre le
+                  texte et l'image des témoins.</p>
+            </div2>
+         </div1>
+         <div1 type="schema">
+            <schemaSpec ident="oddbyexample" start="TEI " docLang="fr">
+               <moduleRef key="tei"/>
+               <!--Checking module textcrit-->
+               <classRef key="att.textCritical"/>
+               <classRef key="model.rdgLike"/>
+               <classRef key="model.rdgPart"/>
+               <classSpec ident="att.textCritical" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="cause" mode="delete"/>
+                     <attDef ident="varSeq" mode="delete"/>
+                     <attDef ident="require" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module msdescription-->
+               <classRef key="model.physDescPart"/>
+               <moduleRef key="msdescription"
+                  include="msDesc locus origDate msIdentifier repository msName colophon explicit incipit msContents msItem history origin"/>
+               <elementSpec ident="msDesc" mode="change">
+                  <attList>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="status" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="draft"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="locus" mode="change">
+                  <attList>
+                     <attDef ident="scheme" mode="delete"/>
+                     <attDef ident="from" mode="delete"/>
+                     <attDef ident="to" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="target" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="origDate" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="msIdentifier" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="repository" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="msName" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="colophon" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="explicit" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="incipit" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="msContents" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="msItem" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="history" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="origin" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <!--Checking module namesdates-->
+               <classRef key="att.datable.iso"/>
+               <classRef key="model.persNamePart"/>
+               <moduleRef key="namesdates"
+                  include="surname forename roleName settlement"/>
+               <elementSpec ident="surname" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="forename" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="roleName" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="settlement" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <classSpec ident="att.datable.iso" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="when-iso" mode="delete"/>
+                     <attDef ident="from-iso" mode="delete"/>
+                     <attDef ident="to-iso" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module dictionaries-->
+               <classRef key="att.lexicographic"/>
+               <classRef key="model.entryLike"/>
+               <classRef key="model.formPart"/>
+               <classRef key="model.gramPart"/>
+               <classRef key="model.lexicalRefinement"/>
+               <classRef key="model.morphLike"/>
+               <classRef key="model.ptrLike.form"/>
+               <classSpec ident="att.lexicographic" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="expand" mode="delete"/>
+                     <attDef ident="split" mode="delete"/>
+                     <attDef ident="value" mode="delete"/>
+                     <attDef ident="location" mode="delete"/>
+                     <attDef ident="mergedIn" mode="delete"/>
+                     <attDef ident="opt" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module tagdocs-->
+               <classRef key="att.combinable"/>
+               <classRef key="att.identified"/>
+               <classRef key="model.contentPart"/>
+               <classSpec ident="att.combinable" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="mode" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.identified" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="ident" mode="delete"/>
+                     <attDef ident="predeclare" mode="delete"/>
+                     <attDef ident="module" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.anchoring" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="targetEnd" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.datable.w3c" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="notBefore" mode="delete"/>
+                     <attDef ident="notAfter" mode="delete"/>
+                     <attDef ident="from" mode="delete"/>
+                     <attDef ident="to" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.editLike" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="evidence" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.pointing" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="targetLang" mode="delete"/>
+                     <attDef ident="evaluate" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.ranging" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="min" mode="delete"/>
+                     <attDef ident="max" mode="delete"/>
+                     <attDef ident="confidence" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.ascribed.directed" type="atts"
+                  mode="change">
+                  <attList>
+                     <attDef ident="toWhom" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.datable" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="period" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.dimensions" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="unit" mode="delete"/>
+                     <attDef ident="quantity" mode="delete"/>
+                     <attDef ident="precision" mode="delete"/>
+                     <attDef ident="scope" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.divLike" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="org" mode="delete"/>
+                     <attDef ident="sample" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.handFeatures" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="scribe" mode="delete"/>
+                     <attDef ident="scribeRef" mode="delete"/>
+                     <attDef ident="script" mode="delete"/>
+                     <attDef ident="scriptRef" mode="delete"/>
+                     <attDef ident="medium" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.media" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="width" mode="delete"/>
+                     <attDef ident="height" mode="delete"/>
+                     <attDef ident="scale" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.naming" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="role" mode="delete"/>
+                     <attDef ident="nymRef" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.pointing.group" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="domains" mode="delete"/>
+                     <attDef ident="targFunc" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.segLike" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="function" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.transcriptional" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="status" mode="delete"/>
+                     <attDef ident="cause" mode="delete"/>
+                     <attDef ident="seq" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.damaged" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="agent" mode="delete"/>
+                     <attDef ident="degree" mode="delete"/>
+                     <attDef ident="group" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.timed" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="start" mode="delete"/>
+                     <attDef ident="end" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <classSpec ident="att.personal" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="full" mode="delete"/>
+                     <attDef ident="sort" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module core-->
+               <moduleRef key="core"
+                  include="p foreign hi quote sic corr choice reg orig gap add del name date list item ptr head note pb lb cb monogr author editor respStmt resp title imprint publisher pubPlace bibl biblStruct l lg sp speaker stage"/>
+               <elementSpec ident="p" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="part" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="N"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="foreign" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="hi" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="quote" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="sic" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="corr" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="choice" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="reg" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="instant" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="orig" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="gap" mode="change">
+                  <attList>
+                     <attDef ident="reason" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="illegible">
+                              <desc>Le fragment est illisible</desc>
+                           </valItem>
+                           <valItem ident="lost">
+                              <desc>Le fragment est perdu</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                     <attDef ident="agent" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="add" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="del" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="name" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="date" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="ptr" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="head" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="note" mode="change">
+                  <constraintSpec ident="note-resp-requis"
+                     scheme="isoschematron" mode="add">
+                     <desc>Les notes descendantes de tei:body doivent avoir un
+                        @resp.</desc>
+                     <constraint>
+                        <schema xmlns="http://purl.oclc.org/dsdl/schematron">
+                           <ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+                           <pattern>
+                              <rule context="tei:body/descendant::tei:note">
+                                 <assert test="@resp" role="error"> Chaque note
+                                    dans le corps du texte doit porter un
+                                    attribut @resp.</assert>
+                              </rule>
+                           </pattern>
+                        </schema>
+                     </constraint>
+                  </constraintSpec>
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="target" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+
+               </elementSpec>
+               <elementSpec ident="pb" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="break" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="lb" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="break" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="no"/>
+                           <valItem ident="yes"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="cb" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="break" mode="delete"/>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="double-column">
+                              <desc>Décrit un début de colonne dans une page à
+                                 deux colonnes</desc>
+                           </valItem>
+                           <valItem ident="single-column">
+                              <desc>Décrit un début de colonne dans une page à
+                                 une colonne</desc>
+                           </valItem>
+                           <valItem ident="triple-column">
+                              <desc>Décrit un début de colonne dans une page à
+                                 trois colonnes</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="monogr" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="author" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="editor" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="respStmt" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="resp" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="title" mode="change">
+                  <attList>
+                     <attDef ident="level" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="imprint" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="publisher" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="pubPlace" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="bibl" mode="change">
+                  <attList>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="status" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="draft"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="source-transcription">
+                              <desc>Décrit le document TXT source.</desc>
+                           </valItem>
+                           <valItem ident="translation">
+                              <desc>Décrit une traduction.</desc>
+                           </valItem>
+                           <valItem ident="work">
+                              <desc>Décrit une oeuvre au sens FRBR</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="biblStruct" mode="change">
+                  <desc>L'élément biblStruct est utilisé pour décrire des
+                     éditions imprimées d'une oeuvre.</desc>
+                  <attList>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="status" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="draft"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="edition"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+
+                  <exemplum>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                        <biblStruct type="edition" ana="#frbr.manifestation">
+                           <monogr>
+                              <!--ISTC pour les incunables. Voir ce qu'on fait pour les imprim&#233;s plus tardifs-->
+                              <idno type="ISTC"/>
+                              <title/>
+                              <author/>
+                              <imprint>
+                                 <pubPlace>Salamanca</pubPlace>
+                                 <publisher>Lorenzo de Liomdedei</publisher>
+                                 <date when="1514-11-10">1514-11-10</date>
+                              </imprint>
+                           </monogr>
+                        </biblStruct>
+                     </egXML>
+                  </exemplum>
+               </elementSpec>
+               <elementSpec ident="l" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="part" mode="change" usage="opt">
+                        <valList mode="add" type="closed">
+                           <valItem ident="N">
+                              <desc>Vers inaltéré (valeur par défaut,
+                                 invisible).</desc>
+                           </valItem>
+                           <valItem ident="I">
+                              <desc>Début de vers coupé par l'intervention d'un
+                                 autre personnage.</desc>
+                           </valItem>
+                           <valItem ident="F">
+                              <desc>Fin de vers coupé par l'intervention d'un
+                                 autre personnage.</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="lg" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="part" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="sp" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="speaker" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="stage" mode="change">
+                  <attList>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <!--Checking module figures-->
+               <moduleRef key="figures" include="figure"/>
+               <elementSpec ident="figure" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="illumination"/>
+                           <valItem ident="miniature"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <!--Checking module header-->
+               <classRef key="att.citeStructurePart"/>
+               <moduleRef key="header"
+                  include="teiHeader fileDesc titleStmt publicationStmt idno availability licence sourceDesc encodingDesc editorialDecl refsDecl citeStructure classDecl taxonomy category catDesc profileDesc langUsage language textClass catRef"/>
+               <elementSpec ident="teiHeader" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="fileDesc" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="titleStmt" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="publicationStmt" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="idno" mode="change">
+                  <attList>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="BNE-id"/>
+                           <valItem ident="BNF-id"/>
+                           <valItem ident="HSMS-ID"/>
+                           <valItem ident="HSMS-WORK"/>
+                           <valItem ident="ISTC"/>
+                           <valItem ident="VIAF-id"/>
+                           <valItem ident="beta-cnum"/>
+                           <valItem ident="beta-copid"/>
+                           <valItem ident="beta-manid"/>
+                           <valItem ident="beta-texid"/>
+                           <valItem ident="biblissima-id"/>
+                           <valItem ident="cote"/>
+                           <valItem ident="factgrid-cnum"/>
+                           <valItem ident="factgrid-id"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="BNE-id"/>
+                           <valItem ident="BNF-id"/>
+                           <valItem ident="HSMS-ID"/>
+                           <valItem ident="HSMS-WORK"/>
+                           <valItem ident="ISTC"/>
+                           <valItem ident="VIAF-id"/>
+                           <valItem ident="beta-cnum"/>
+                           <valItem ident="beta-copid"/>
+                           <valItem ident="beta-manid"/>
+                           <valItem ident="beta-texid"/>
+                           <valItem ident="biblissima-id"/>
+                           <valItem ident="cote"/>
+                           <valItem ident="factgrid-cnum"/>
+                           <valItem ident="factgrid-id"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="availability" mode="change">
+                  <attList>
+                     <attDef ident="status" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="restricted"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="licence" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="notBefore-iso" mode="delete"/>
+                     <attDef ident="notAfter-iso" mode="delete"/>
+                     <attDef ident="when" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="sourceDesc" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="encodingDesc" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="editorialDecl" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="refsDecl" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="citeStructure" mode="change">
+                  <attList>
+                     <attDef ident="unit" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="livre"/>
+                           <valItem ident="chapitre"/>
+                           <valItem ident="colonne"/>
+                           <valItem ident="ligne"/>
+                           <valItem ident="page"/>
+                           <valItem ident="section"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="classDecl" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="taxonomy" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="category" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="catDesc" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="profileDesc" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="langUsage" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="language" mode="change">
+                  <attList>
+                     <attDef ident="usage" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="textClass" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="default" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="false"/>
+                        </valList>
+                     </attDef>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="catRef" mode="change">
+                  <attList>
+                     <attDef ident="scheme" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <!--Checking module gaiji-->
+               <classRef key="att.gaijiProp"/>
+               <moduleRef key="gaiji" include="g"/>
+               <elementSpec ident="g" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <classSpec ident="att.gaijiProp" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="name" mode="delete"/>
+                     <attDef ident="value" mode="delete"/>
+                     <attDef ident="version" mode="delete"/>
+                     <attDef ident="scheme" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module verse-->
+               <!--Checking module drama-->
+               <!--Checking module transcr-->
+               <classRef key="att.global.facs"/>
+               <moduleRef key="transcr"
+                  include="ex fw handShift space subst supplied"/>
+               <elementSpec ident="ex" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="fw" mode="change">
+                  <attList>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="réclame">
+                              <desc>Décrit une réclame</desc>
+                           </valItem>
+                           <valItem ident="signature">
+                              <desc>Décrit une signature<!-- (<quote>marques qui
+                                    consistent à numéroter des cahiers
+                                    (signatures de cahiers) ou des bifeuillets
+                                    (signatures de bifeuillets</quote>, <ref
+                                    target="https://www.univ-montp3.fr/uoh/lelivre/partie1/les_cahiers.html"
+                                 />)--> de
+                                 feuillet</desc>
+                           </valItem>
+                           <valItem ident="titre-courant">
+                              <desc>Décrit un titre courant.</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="réclame"/>
+                           <valItem ident="signature"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+                  <exemplum>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples"><fw
+                           rend="titre-courant">GENESIS <lb break="yes"
+                              />L<ex>IBRO</ex> I</fw></egXML>
+                  </exemplum>
+                  <exemplum>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples"><fw
+                           type="signature">C ij</fw>
+                        <pb n="12v"/></egXML>
+                  </exemplum>
+                  <exemplum>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples">⅋ la <fw
+                           type="réclame">su muerte</fw>
+                        <pb n="113r"/>
+                        <cb type="double-column"/><lb break="yes"/>su muerte
+                        fue</egXML>
+                  </exemplum>
+               </elementSpec>
+               <elementSpec ident="handShift" mode="change">
+                  <attList>
+                     <attDef ident="new" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="space" mode="change">
+                  <attList>
+                     <attDef ident="dim" mode="delete"/>
+                     <attDef ident="resp" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="subst" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="supplied" mode="change">
+                  <attList>
+                     <attDef ident="reason" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="extent" mode="delete"/>
+                     <attDef ident="atLeast" mode="delete"/>
+                     <attDef ident="atMost" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <!--Checking module linking-->
+               <classRef key="att.global.linking"/>
+               <moduleRef key="linking" include="ab seg"/>
+               <elementSpec ident="ab" mode="change">
+                  <desc>est utilisé uniquement à l'intérieur d'une
+                        <gi>figure</gi> contenant du texte.</desc>
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="part" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="N"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+                  <exemplum>
+                     <egXML xmlns="http://www.tei-c.org/ns/Examples"><head>
+                           <figure type="illumination">
+                              <ab><hi rend="rubrique">Aqui se comie<ex>n</ex>c<choice>
+                                       <corr>'</corr>
+                                       <sic/>
+                                    </choice>a el xxiiij<hi rend="superscript"
+                                       >o</hi>. li<lb break="no"/>bro dela
+                                       gen<ex>er</ex>al estoria:</hi></ab>
+                           </figure>
+                        </head></egXML>
+                  </exemplum>
+               </elementSpec>
+               <elementSpec ident="seg" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="part" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="N"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="ana" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="#addendum"/>
+                           <valItem ident="#glose"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <classSpec ident="att.global.linking" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="synch" mode="delete"/>
+                     <attDef ident="copyOf" mode="delete"/>
+                     <attDef ident="next" mode="delete"/>
+                     <attDef ident="prev" mode="delete"/>
+                     <attDef ident="exclude" mode="delete"/>
+                     <attDef ident="select" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module analysis-->
+               <classRef key="att.global.analytic"/>
+               <classRef key="att.linguistic"/>
+               <classSpec ident="att.linguistic" type="atts" mode="change">
+                  <attList>
+                     <attDef ident="lemma" mode="delete"/>
+                     <attDef ident="lemmaRef" mode="delete"/>
+                     <attDef ident="pos" mode="delete"/>
+                     <attDef ident="msd" mode="delete"/>
+                     <attDef ident="join" mode="delete"/>
+                  </attList>
+               </classSpec>
+               <!--Checking module textstructure-->
+               <moduleRef key="textstructure"
+                  include="TEI text body div front back argument trailer"/>
+               <elementSpec ident="TEI" mode="change">
+                  <attList>
+                     <attDef ident="version" mode="delete"/>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="corrigé"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="text" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="type" mode="delete"/>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="body" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="div" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                     <attDef ident="part" mode="change">
+                        <valList mode="add" type="closed">
+                           <valItem ident="N"/>
+                        </valList>
+                     </attDef>
+                     <attDef ident="type" mode="change" usage="req">
+                        <valList mode="add" type="closed">
+                           <valItem ident="main">
+                              <desc>La division correspond à la partie
+                                 principale de l'oeuvre, quand des parties
+                                 annexes qui ne sont pas propre à l'épilogue ou
+                                 au prologue (addenda par exemple)
+                                 existent.</desc>
+                           </valItem>
+                           <valItem ident="sommaire">
+                              <desc>La division est un sommaire.</desc>
+                           </valItem>
+                           <valItem ident="page_titre">
+                              <desc>La division est une page de titre.</desc>
+                           </valItem>
+                           <valItem ident="scene">
+                              <desc>La division est une scène.</desc>
+                           </valItem>
+                           <valItem ident="acte">
+                              <desc>La division est un acte.</desc>
+                           </valItem>
+                           <valItem ident="colophon">
+                              <desc>La division correspond au colophon.</desc>
+                           </valItem>
+                           <valItem ident="epilogue">
+                              <desc>La division est l'épilogue</desc>
+                           </valItem>
+                           <valItem ident="prologue">
+                              <desc>La division est un prologue.</desc>
+                           </valItem>
+                           <valItem ident="livre">
+                              <desc>La division est un livre.</desc>
+                           </valItem>
+                           <valItem ident="partie">
+                              <desc>La division est une partie.</desc>
+                           </valItem>
+                           <valItem ident="chapitre">
+                              <desc>La division est un chapitre.</desc>
+                           </valItem>
+                           <valItem ident="section">
+                              <desc>La division est une section (élément
+                                 structurel qui ne peut être réduit au système
+                                 livre-partie-chapitre).</desc>
+                           </valItem>
+                           <valItem ident="sous-section">
+                              <desc>La division est une sous-section (élément
+                                 structurel qui ne peut être réduit au système
+                                 livre-partie-chapitre).</desc>
+                           </valItem>
+                           <valItem ident="sous-sous-section">
+                              <desc>La division est une sous-sous-section
+                                 (élément structurel qui ne peut être réduit au
+                                 système livre-partie-chapitre).</desc>
+                           </valItem>
+                           <valItem ident="poeme">
+                              <desc>La division est un poème (unité
+                                 versifiée).</desc>
+                           </valItem>
+                           <valItem ident="addendum">
+                              <desc>La division est un addendum (texte ajouté à
+                                 un texte principal).</desc>
+                           </valItem>
+                           <valItem ident="autre">
+                              <desc>La division est une section (division
+                                 générique) qui n'entre dans aucune des
+                                 catégories précédentes.</desc>
+                           </valItem>
+                        </valList>
+                     </attDef>
+                     <attDef ident="subtype" mode="delete"/>
+                     <attDef ident="hand" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="argument" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="front" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+               <elementSpec ident="back" mode="change">
+                  <attList>
+                     <attDef ident="ana" mode="delete"/>
+                     <attDef ident="facs" mode="delete"/>
+                     <attDef ident="corresp" mode="delete"/>
+                     <attDef ident="sameAs" mode="delete"/>
+                     <attDef ident="cert" mode="delete"/>
+                  </attList>
+               </elementSpec>
+            </schemaSpec>
+         </div1>
+      </body>
+   </text>
+</TEI>
