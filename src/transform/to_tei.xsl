@@ -271,6 +271,9 @@
 
     <xsl:template match="RMK">
         <xsl:element name="note">
+            <xsl:attribute name="resp">
+                <xsl:text>#transcriptor</xsl:text>
+            </xsl:attribute>
             <xsl:apply-templates/>
         </xsl:element>
     </xsl:template>

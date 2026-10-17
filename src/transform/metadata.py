@@ -87,7 +87,7 @@ def retrieve_metadata(as_list, filename, name_parser, work_id, disable_queries=F
 	:param as_list: le chemin vers le fichier
 	:return: un dictionnaire contenant les metadonnées
 	"""
-	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="\t")
+	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="$")
 	df_codex = utils.import_table_as_dataframe(path="databases/tabla-codices.csv", sep="\t")
 	df_oeuvres = df_oeuvres.replace({float('nan'): None})
 	df_codex = df_codex.replace({float('nan'): None})
@@ -246,6 +246,7 @@ def retrieve_metadata(as_list, filename, name_parser, work_id, disable_queries=F
 		"oeuvre_id": oeuvre_id,
 		"HSMS_ident": HSMS_ident
 	}
+	print(metadata_dict)
 	return metadata_dict
 
 

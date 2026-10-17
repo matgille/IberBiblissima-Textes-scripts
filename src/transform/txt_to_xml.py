@@ -564,7 +564,10 @@ def inject_metadata(metadata, structured_text):
 	for lang in langues:
 		language = ET.SubElement(langUsage, "language")
 		language.text = lang
-		language.set("ident", dict_langues[lang])
+		try:
+			language.set("ident", dict_langues[lang])
+		except KeyError:
+			language.set("ident", "Error")
 
 	# Catégorie formelle; matière textuelle
 	catRef = profileDesc.xpath("descendant::catRef")[0]

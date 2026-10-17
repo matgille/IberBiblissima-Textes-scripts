@@ -19,9 +19,8 @@ def create_multiple_msItem(codex_ident, xml_tree):
 	:return:
 	"""
 
-	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="\t")
+	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="$")
 	df_codices = utils.import_table_as_dataframe(path="databases/tabla-codices.csv", sep="\t")
-
 	oeuvre_filtree_codex = df_oeuvres[df_oeuvres["HSMS ID"] == codex_ident]
 	codex_filtre = df_codices[df_codices["HSMS ID"] == codex_ident]
 
@@ -105,7 +104,7 @@ def create_multiple_msItem(codex_ident, xml_tree):
 def work_loop(files, filter):
 	name_parser = pipeline("ner", model="ele-sage/distilbert-base-uncased-name-splitter",
 						   aggregation_strategy="simple")
-	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="\t")
+	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="$")
 	n = 0
 	no_splits = ["HSMS-0037", "HSMS-0190", "HSMS-0248", "HSMS-0122"]
 	splits = ["HSMS-0409", "HSMS-0200"]

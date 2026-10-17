@@ -86,29 +86,9 @@ def structure_chapters(path, do_books:bool):
 			# first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)]", namespaces=namespaces)[0]
 		except IndexError:
 			print("Error")
+			exit()
 			# Create a default div if no rubric is found
-			parent_element = book.xpath("tei:div", namespaces=namespaces)[0]
-			subdiv = ET.Element("div")
-			parent_element.append(subdiv)
-			subdiv.set("type", "chapitre")
-			p = ET.Element("p")
-			subdiv.append(p)
 
-			# Add all content to the default paragraph
-			for node in book.iterchildren():
-				if node.tag == "{http://www.tei-c.org/ns/1.0}div":
-					continue  # Skip existing divs
-				try:
-					node.tag = ET.QName(node).localname
-				except (ValueError, AttributeError):
-					pass
-				p.append(node)
-
-			basename = path.split("/")[-1]
-			out_path = f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/structured/{basename}"
-			with open(out_path, "w") as output_xml:
-				output_xml.write(ET.tostring(xml_tree, pretty_print=True, encoding="utf8").decode("utf8"))
-			return
 
 		# Le tail de la rubrique n'est pas pris en compte
 		# Vérifier que le premier texte de la rubrique n'est pas ignoré.
@@ -118,29 +98,16 @@ def structure_chapters(path, do_books:bool):
 		# for node in following_siblings:
 		current_node = first_rubric
 		for index, node in enumerate(following_siblings):
-			text_content = "".join(node.xpath("self::tei:seg[@ana='#glose']/descendant::text()", namespaces=namespaces))
-			is_testigo = text_content == "testigo"
-			if is_testigo:
-				pass
+			# text_content = "".join(node.xpath("self::tei:seg[@ana='#glose']/descendant::text()", namespaces=namespaces))
+			# is_testigo = text_content == "testigo"
+			# if is_testigo:
+			# 	pass
 				# localisation_dict[node] = []
 				# current_node = node
 			# elif node.tag == "{http://www.tei-c.org/ns/1.0}g" and node.attrib['ref'] == "#calderon1":
 			# 	localisation_dict[node] = []
 			# 	current_node = node
-			elif node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] == 'rubrique':
-			#elif node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] in ['rubrique', 'initiale']:
-				# On filtre d'abord en vérifiant si le numéro est présent
-				regexp = re.compile(r"[ICXV]+")
-				tail = node.xpath("following::tei:lb", namespaces=namespaces)[0].tail
-				# if tail is None or re.search(regexp, tail) is None:
-				# 	print("IGNORED")
-				# 	print(tail)
-				# 	localisation_dict[current_node].append(node)
-				# 	continue
-				# else:
-				# 	print("OK")
-				# 	print(tail)
-				# 	pass
+			if node.tag == "{http://www.tei-c.org/ns/1.0}hi" and node.attrib['rend'] in ['rubrique']:
 				if node.xpath("contains(preceding-sibling::tei:hi[@rend='rubrique'][1], '+') or contains(preceding-sibling::tei:hi[@rend='rubrique'][1], '⇒')", namespaces=namespaces):
 					localisation_dict[current_node].append(node)
 				else:
@@ -151,10 +118,7 @@ def structure_chapters(path, do_books:bool):
 
 		parent_element = book
 		for idx, (rubric, following_nodes) in enumerate(localisation_dict.items()):
-			text_content = "".join(rubric.xpath("self::tei:seg[@ana='#glose']/descendant::text()", namespaces=namespaces))
-			is_testigo = text_content == "testigo"
-			rubric.tag = ET.QName(rubric).localname
-			if False and rubric.attrib['rend'] == 'initiale':
+			if rubric.attrib['rend'] != 'rubrique':
 			#if  is_testigo or rubric.attrib['ref'] == '#calderon1':
 				subdiv = ET.Element("div")
 				parent_element.append(subdiv)
@@ -206,12 +170,15 @@ def structure_chapters(path, do_books:bool):
 		# On va replacer les tei:hi qui sont scindés sur plusieurs lignes.
 		target_rubrics = parent_element.xpath("descendant::p/descendant::hi[@rend='rubrique']", namespaces=namespaces)
 		for rubrique in target_rubrics:
-			preceding_rubric = rubrique.xpath("ancestor::div[@type='chapitre']/head/hi", namespaces=namespaces)[0]
+			preceding_rubric = rubrique.xpath("ancestor::div[@type='chapitre']/head/tei:hi", namespaces=namespaces)[0]
 			joined_text = " ".join([item for item in preceding_rubric.itertext()])
 			if  re.search(r"[+⇒]\s*$", joined_text):
 				lb = ET.Element("lb")
 				lb.set("break", "yes")
-				preceding_rubric.set("type", "merged")
+				if re.search(r"⇒\s*$", joined_text):
+					preceding_rubric.set("type", "check_pb")
+				else:
+					preceding_rubric.set("type", "merged")
 				preceding_rubric.append(lb)
 				preceding_rubric.append(rubrique)
 				unwrap(rubrique)

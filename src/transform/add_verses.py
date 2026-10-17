@@ -59,8 +59,9 @@ def structure_stroph(lineGroup):
 def structure(path):
 	xml_tree = ET.parse(path)
 	divs = xml_tree.xpath("descendant::tei:div", namespaces=namespaces)[0]
+	lgs = xml_tree.xpath("descendant::tei:lg[not(tei:l)]", namespaces=namespaces)
 
-	for div in divs:
+	for div in lgs:
 		first_line = div.xpath("descendant::tei:lb", namespaces=namespaces)[0]
 		# Le tail de la pied_mouch n'est pas pris en compte
 		# Vérifier que le premier texte de la pied_mouch n'est pas ignoré.
@@ -86,14 +87,14 @@ def structure(path):
 			[strophe.append(item) for  item in following_nodes]
 			parent_element.append(strophe)
 
-	all_verses = xml_tree.xpath("descendant::l", namespaces=namespaces)
-	grouped = [list(group) for group in zip(*[iter(all_verses)] * 4)]
-	for idx, group in enumerate(grouped):
-		first_verse_anchor = group[0].getparent()
-		lg = ET.Element("lg")
-		lg.set("n", str(idx + 1))
-		[lg.append(item) for item in group]
-		first_verse_anchor.append(lg)
+	# all_verses = xml_tree.xpath("descendant::l", namespaces=namespaces)
+	# grouped = [list(group) for group in zip(*[iter(all_verses)] * 4)]
+	# for idx, group in enumerate(grouped):
+	# 	first_verse_anchor = group[0].getparent()
+	# 	lg = ET.Element("lg")
+	# 	lg.set("n", str(idx + 1))
+	# 	[lg.append(item) for item in group]
+	# 	first_verse_anchor.append(lg)
 
 	basename = path.split("/")[-1]
 	out_path = f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/versified/{basename}"

@@ -23,6 +23,7 @@ def main(file, facs_dir, page_shift):
 			correct_pb = f"0{idx}"
 		wd = f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/{facs_dir}/"
 		page_break.set("facs", f"{wd}pg_{correct_pb}.pdf")
+		page_break.set("facs", f"{wd}{correct_pb}.jpg")
 	serialize(path=f"/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/with_facs/{file.split('/')[-1]}", xml_tree=xml_tree)
 
 
