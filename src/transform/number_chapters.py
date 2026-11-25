@@ -12,7 +12,7 @@ def add_n(file):
 	as_tree = ET.parse(file)
 	root = as_tree.getroot()
 	parent_type = "//tei:div[@type='livre']"
-	# parent_type = "//tei:body"
+	parent_type = "//tei:body"
 	target_node = f"descendant::tei:div[@type='chapitre']"
 	#target_node = f"descendant::tei:div[@type='acte']"
 	for idx_livre, livre_div in enumerate(root.xpath(parent_type, namespaces=namespaces)):
@@ -24,12 +24,12 @@ def add_n(file):
 			current_n += 1
 
 
-	parent_type = "//tei:body"
-	target_node = f"descendant::tei:div[@type='partie']"
-	for idx_livre, livre_div in enumerate(root.xpath(parent_type, namespaces=namespaces)):
-		livre_div.set("n", str(idx_livre + 1))
-		for idx_chapitre, target_div in enumerate(livre_div.xpath(target_node, namespaces=namespaces)):
-			target_div.set("n", str(idx_chapitre + 1))
+	# parent_type = "//tei:body"
+	# target_node = f"descendant::tei:div[@type='section']"
+	# for idx_livre, livre_div in enumerate(root.xpath(parent_type, namespaces=namespaces)):
+	# 	livre_div.set("n", str(idx_livre + 1))
+	# 	for idx_chapitre, target_div in enumerate(livre_div.xpath(target_node, namespaces=namespaces)):
+	# 		target_div.set("n", str(idx_chapitre + 1))
 
 	as_tree.write(file, pretty_print=True, encoding="utf-8")
 

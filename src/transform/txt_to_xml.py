@@ -132,6 +132,12 @@ def modify_delimiter(text):
 
 
 def iterxml(text, id=""):
+	"""
+	Principale fonction de conversion des balises XML et de construction de l'arbre XML, méthode de stack
+	:param text:
+	:param id:
+	:return:
+	"""
 	output = []
 	stack = []
 	pos = 0

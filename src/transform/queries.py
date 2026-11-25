@@ -54,6 +54,7 @@ SELECT ?cnum ?cnumLabel ?author ?authorName ?segmentation ?segmentationLabel ?ws
   SERVICE wikibase:label {{ bd:serviceParam wikibase:language "es, en". }}
 }}
 """
+    time.sleep(1)
     r = requests.get(
         SPARQL_ENDPOINT,
         params={"query": query},
@@ -61,10 +62,14 @@ SELECT ?cnum ?cnumLabel ?author ?authorName ?segmentation ?segmentationLabel ?ws
             "Accept": "application/sparql-results+json",
             "User-Agent": "Biblissima-texte/1.0 (contact matthias.gille-levenson@ens-lyon.fr)",
         },
-        timeout=10,
+        timeout=100,
     )
 
-    data = r.json()
+    try:
+        data = r.json()
+    except requests.exceptions.JSONDecodeError:
+        print("Error decoding JSON response")
+        return None
     try:
         colophon = next(item['unit_incipit']['value']
                             for item in data['results']['bindings']

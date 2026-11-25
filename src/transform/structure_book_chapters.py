@@ -1,3 +1,4 @@
+import copy
 import glob
 import json
 import re
@@ -68,7 +69,14 @@ def structure_book(xml_tree):
 	return xml_tree
 
 
-def structure_chapters(path, do_books:bool):
+def structure_chapters(path, do_books:bool=False, shift_text_multiple_initials:bool=False):
+	"""
+	Structure the chapters of a text
+	:param path: 
+	:param do_books: Structure books also ?
+	:param shift_text_multiple_initials: should we move the text in chapters that have multiple initials?
+	:return: 
+	"""
 	xml_tree = ET.parse(path)
 	if do_books is True:
 		xml_tree = structure_book(xml_tree)
@@ -81,9 +89,9 @@ def structure_chapters(path, do_books:bool):
 	for idx, book in enumerate(books):
 		print(f"Treating book {idx + 1}")
 		try:
-			first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)] |  descendant::tei:hi[@rend='initiale']", namespaces=namespaces)[0]
+			# first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)] |  descendant::tei:hi[@rend='initiale']", namespaces=namespaces)[0]
 			# first_rubric = book.xpath("descendant::tei:g[@ref='#calderon1']", namespaces=namespaces)[0]
-			# first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)]", namespaces=namespaces)[0]
+			first_rubric = book.xpath("descendant::tei:hi[@rend='rubrique'][not(ancestor::figure)]", namespaces=namespaces)[0]
 		except IndexError:
 			print("Error")
 			exit()
@@ -182,27 +190,39 @@ def structure_chapters(path, do_books:bool):
 				preceding_rubric.append(lb)
 				preceding_rubric.append(rubrique)
 				unwrap(rubrique)
-		# for chapter in book.xpath("descendant::div[@type='chapitre']", namespaces=namespaces):
-		# 	regexp = re.compile(r"([ICXV]+)")
-		# 	tail = chapter.xpath("descendant::p/lb", namespaces=namespaces)[0].tail
-		# 	if tail is not None and re.search(regexp, tail):
-		# 		identified_number = re.search(regexp, tail).group(1)
-		# 		converted = roman.roman_to_int(identified_number)
-		# 		as_number = int(converted)
-		# 		if as_number == int(chapter.attrib['n']):
-		# 			pass
-		# 		else:
-		# 			chapter.set("subtype", "revoir")
-	for idx, page_break in enumerate(xml_tree.xpath("descendant::pb", namespaces=namespaces)):
-		idx += 2
-		if idx < 10:
-			correct_pb = f"000{idx}"
-		elif idx < 100:
-			correct_pb = f"00{idx}"
-		elif idx < 1000:
-			correct_pb = f"0{idx}"
-		wd = "/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/HSMS-0075/"
-		# page_break.set("facs", f"{wd}pg_{correct_pb}.pdf")
+				regexp = re.compile(r'([^\s<>/\-]+)-([^<>/\-]+)\s+\+\s?<lb break="yes"/>')
+				as_string = ET.tostring(preceding_rubric, pretty_print=True).decode()
+				as_string = re.sub(r"\s+", r" ", as_string)
+				if re.search(regexp, as_string):
+					modified_rubrique = re.sub(regexp, r" \1<lb break='no'/>\2 ", as_string)
+					modified_rubrique = ET.fromstring(modified_rubrique)
+					preceding_rubric.getparent().replace(preceding_rubric, modified_rubrique)
+	all_initials = "descendant::div[@type='chapitre'][count(descendant::hi[@rend='initiale'])= 2]/descendant::hi[@rend='initiale'][last()]"
+	multiple_initials = xml_tree.xpath(all_initials, namespaces=namespaces)
+	if shift_text_multiple_initials is False:
+		print(f"{len(multiple_initials)} spans of text could have been shifted due to multiple rubrics."
+			  f"Check xpath: //tei:div[@type='chapitre'][count(descendant::tei:hi[@rend='initiale'])= 2]/descendant::tei:hi[@rend='initiale'][last()]")
+	if shift_text_multiple_initials is True:
+		for initial in multiple_initials:
+			initial_copy = copy.deepcopy(initial)
+			following_nodes = initial.xpath("following-sibling::*", namespaces=namespaces)
+			as_comment = ET.Comment(ET.tostring(initial_copy).decode() + ''.join([ET.tostring(item).decode().replace(' xmlns="http://www.tei-c.org/ns/1.0"', '') for item in following_nodes]))
+			initial.addprevious(as_comment)
+			following_p = initial.xpath("ancestor::div[@type='chapitre']/following-sibling::div[@type='chapitre'][1]/descendant::p")[0]
+			following_p_content = copy.deepcopy(following_p.xpath("*"))
+			content_wrapper = ET.Element("wrapper")
+			content_wrapper.extend(following_p_content)
+			lbreak = ET.Element("lb")
+			lbreak.set("break", "yes")
+			comment = ET.Comment(ET.tostring(content_wrapper))
+			wrapper = ET.Element("wrapper")
+			wrapper.append(initial)
+			wrapper.extend(following_nodes)
+			wrapper.append(lbreak)
+			following_p.insert(0, wrapper)
+			following_p.insert(0, comment)
+			following_p.set("type", "modified")
+			unwrap(wrapper)
 	serialize(path=path, xml_tree=xml_tree)
 
 

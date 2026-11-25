@@ -1,3 +1,4 @@
+import random
 import re
 import time
 
@@ -103,16 +104,19 @@ def create_multiple_msItem(codex_ident, xml_tree):
 # TODO: manuscrits composites avec ordre altéré (0089: fin du Libro de Alexandre après intercalation d'un autre item)
 def work_loop(files, filter):
 	name_parser = pipeline("ner", model="ele-sage/distilbert-base-uncased-name-splitter",
-						   aggregation_strategy="simple")
+						   aggregation_strategy="simple", device="cpu")
 	df_oeuvres = utils.import_table_as_dataframe(path="databases/tabla-obras.csv", sep="$")
 	n = 0
 	no_splits = ["HSMS-0037", "HSMS-0190", "HSMS-0248", "HSMS-0122"]
 	splits = ["HSMS-0409", "HSMS-0200"]
 	skip_metadata_retrieval = False
 	previous_work = None
+	df_oeuvres = df_oeuvres.sample(frac=1)
 	for idx, work in df_oeuvres.iterrows():
-		if work['HSMS ID'] != filter:
+		if filter and work['HSMS ID'] != filter:
 			continue
+		else:
+			print("Found you")
 		# On vérifie que le manuscrit contient plusieurs oeuvres
 		n += 1
 		print(n)
@@ -128,6 +132,10 @@ def work_loop(files, filter):
 		work_id = work["Obra ID"]
 		mss_id = "-".join(work_id.split("-")[:-1])
 		contains_multiple_works = len(df_oeuvres[df_oeuvres['HSMS ID'].str.contains(mss_id)]) > 1
+		is_file = len(glob.glob(f"test_data/xml/text_{work['Obra ID']}*.xml")) != 0
+		if is_file:
+			print("File already converted. Skipping")
+			continue
 
 
 
@@ -186,8 +194,8 @@ def main(files: str, filter) -> None:
 	:return: None
 	"""
 
-	name_parser = pipeline("ner", model="ele-sage/distilbert-base-uncased-name-splitter",
-						   aggregation_strategy="simple")
+	# name_parser = pipeline("ner", model="ele-sage/distilbert-base-uncased-name-splitter",
+	# 					   aggregation_strategy="simple")
 	work_loop(files, filter)
 
 
@@ -195,4 +203,6 @@ if __name__ == '__main__':
 	all_files = glob.glob(f"{sys.argv[1]}/*.txt")
 	if len(sys.argv) == 3:
 		filter = sys.argv[2]
+	else:
+		filter = None
 	main(all_files, filter)

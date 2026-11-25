@@ -83,7 +83,7 @@ def structure_chapters(path, do_books:bool):
 		all_rubrics = book.xpath("descendant::tei:div[@type='chapitre']/tei:head/tei:hi", namespaces=namespaces)
 
 		# On récupère les headings qui contiennent "Titul"
-		matching = [item for item in all_rubrics if "Titul" in ''.join(item.itertext())]
+		matching = [item for item in all_rubrics if "Titu" in ''.join(item.itertext())]
 		print(matching)
 		for item in matching:
 			ancestor_div = item.xpath("ancestor::tei:div[@type='chapitre']", namespaces=namespaces)[0]
@@ -110,9 +110,9 @@ def structure_chapters(path, do_books:bool):
 				milestone.addnext(previous_title)
 				milestone.getparent().remove(milestone)
 				previous_title.append(heading)
-				chapter.set("type", "prologue")
+				# chapter.set("type", "prologue")
 			else:
-				if re.search("Le[ixy]", ''.join(heading.itertext())):
+				if True: # re.search("[lL]e[ixy]", ''.join(heading.itertext())):
 					chapter.set("type", "sous-sous-section")
 					chapter.set("subtype", "ley")
 					chapter.set("n", str(div_n))
@@ -131,39 +131,6 @@ def structure_chapters(path, do_books:bool):
 	serialize(path=path, xml_tree=xml_tree)
 
 
-
-def set_page_breaks(path, base_path="/home/mgl/Bureau/Travail/projets/Biblissima-Text/data/Biblissima-Textes/facsimiles/HSMS-0075/"):
-	"""
-	Sets the facsimile paths for page breaks in the XML tree.
-
-	Args:
-		xml_tree: The XML tree to process
-		base_path: The base path for facsimile images (default is HSMS-0075)
-	"""
-	# Find all page breaks, handling both namespaced and non-namespaced elements
-	xml_tree = ET.parse(path)
-	page_breaks = xml_tree.xpath(
-		"descendant::pb | descendant::tei:pb",
-		namespaces=namespaces
-	)
-
-	for idx, page_break in enumerate(page_breaks):
-		# Start numbering from 2 (as in the original code)
-		page_num = idx + 1
-
-		# Format the page number with leading zeros
-		if page_num < 10:
-			correct_pb = f"000{page_num}"
-		elif page_num < 100:
-			correct_pb = f"00{page_num}"
-		elif page_num < 1000:
-			correct_pb = f"0{page_num}"
-		else:
-			correct_pb = str(page_num)
-
-		# Set the facs attribute with the formatted page number
-		page_break.set("facs", f"{base_path}pg_{correct_pb}.pdf")
-	return xml_tree
 
 def serialize(path, xml_tree):
 	basename = path.split("/")[-1]
